@@ -9,5 +9,6 @@ public class Main {
         System.out.println("Username: Vadim");
         System.out.println("Password: Test1234!");
         System.out.println("Login successful");
+        System.out.println("Login message is: 'You've logged in as Vadim'");
     }
 }
