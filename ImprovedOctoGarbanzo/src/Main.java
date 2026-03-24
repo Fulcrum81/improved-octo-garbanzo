@@ -1,16 +1,35 @@
+import objects.Book;
+import objects.Goods;
+import objects.Movie;
+import shapes.Circle;
+import shapes.Rectangle;
+import shapes.Shape;
+import shapes.Square;
+
 import java.util.Scanner;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static final double PI_IS_A_GREAT_NUMBER = 3.14159265359;
 
-
     public static void main(String[] args) {
-        String myName = "Vadim";
+        Circle circle1 = new Circle(10);
+        Circle circle2 = new Circle(25);
+        Square square = new Square(15);
+        Rectangle rectangle = new Rectangle(45, 20);
+
+        double sumOfAreas = addUpAreas(circle2, circle1, square, rectangle);
+
+        System.out.println(sumOfAreas);
+
+
+
+//        String myName = "Vadim";
+
 //        sayHello(myName);
 //        System.out.println(myName);
 
-//        Book.printGenericBookInfo();
+//        objects.Book.printGenericBookInfo();
 //
 //        String myString = "Hi, I am a string!";
 //        System.out.println(myString.length());
@@ -35,16 +54,15 @@ public class Main {
 //
 //        } while(userInput != 0);
 //
-        Book harryPotter = new Book("Harry Potter", "Joanne Rowling",
-                "Fantasy", 300, 2026);
-
-        sayHello(myName, harryPotter);
-
-
-        System.out.println(myName);
-        System.out.println(harryPotter.name);
+          // class objects.Book is used to create a book object
+//        Book harryPotter = new Book("Harry Potter", "Joanne Rowling",
+//                "Fantasy", 300, 2026, 50, 5);
 //
-//        System.out.println(harryPotter.getName());
+////        sayHello(myName, harryPotter);
+//
+//        System.out.println(myName);
+////
+//        System.out.println(harryPotter);
 //
 ////        sayHello("Joanne Rowling");
 ////
@@ -54,7 +72,7 @@ public class Main {
 //
 //        sum(4);
 
-//        Book lotr = new Book();
+//        objects.Book lotr = new objects.Book();
 //        lotr.name = "Lord of the Rings";
 //
 //        harryPotter.printInfo();
@@ -154,7 +172,7 @@ public class Main {
     }
 
     public static void sayHello(String name, Book book) {
-        book.name = "Pulp Fiction";
+//        book.name = "Pulp Fiction";
         name = "Petya";
         System.out.println("Hello, " + name);
         System.out.println("Your favorite book is: " + book.getName());
@@ -187,5 +205,14 @@ public class Main {
 
     public static void printTasksInfo() {
 
+    }
+
+    public static double addUpAreas(Shape... shapes) {
+        double sum = 0;
+        for (Shape shape : shapes) {
+            sum += shape.getArea();
+            shape.hello();
+        }
+        return sum;
     }
 }

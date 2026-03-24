@@ -1,5 +1,7 @@
-public class Book {
-    public String name;
+package objects;
+
+public class Book extends Goods {
+    private String name;
     private String author;
     private String genre;
     private int numberOfPages;
@@ -7,14 +9,16 @@ public class Book {
 
     private String stringInfo;
 
-    public Book(String name, String author, String genre, int numberOfPages, int yearOfPublishing) {
+    public Book(String name, String author, String genre, int numberOfPages, int yearOfPublishing, double price, int qty) {
         this.name = name;
         this.author = author;
         this.genre = genre;
         this.numberOfPages = numberOfPages;
         this.yearOfPublishing = yearOfPublishing;
+        this.price = price;
+        this.qty = qty;
 
-        this.stringInfo = String.format("=======\nBook name: %s\nAuthor: %s\nGenre: %s\nPages: %d\nYear of publishing: %d\n=======\n",
+        this.stringInfo = String.format("=======\nobjects.Book name: %s\nAuthor: %s\nGenre: %s\nPages: %d\nYear of publishing: %d\n=======\n",
                 name, author, genre, numberOfPages, yearOfPublishing);
     }
 
@@ -33,6 +37,11 @@ public class Book {
 
     public static void printGenericBookInfo() {
         System.out.println("A book is something that contains series of pages");
+    }
+
+    @Override
+    public String toString() {
+        return stringInfo;
     }
 
 }
