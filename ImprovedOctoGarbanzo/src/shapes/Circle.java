@@ -16,4 +16,8 @@ public class Circle extends Shape implements Countable {
     public double count() {
         return 0;
     }
+
+    public String circleHello() {
+        return "Hello, I'm a circle!";
+    }
 }

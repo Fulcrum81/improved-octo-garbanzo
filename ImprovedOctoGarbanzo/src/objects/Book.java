@@ -1,5 +1,9 @@
 package objects;
 
+import automation.Browser;
+
+import static automation.Browser.chrome;
+
 public class Book extends Goods {
     private String name;
     private String author;
@@ -37,6 +41,10 @@ public class Book extends Goods {
 
     public static void printGenericBookInfo() {
         System.out.println("A book is something that contains series of pages");
+    }
+
+    public String getDataForFileWriter() {
+        return String.format("%s/%s/%s/%d/%d/%f/%d", name, author, genre, numberOfPages, yearOfPublishing, price, qty);
     }
 
     @Override

@@ -1,27 +1,56 @@
 import objects.Book;
-import objects.Goods;
-import objects.Movie;
 import shapes.Circle;
-import shapes.Rectangle;
 import shapes.Shape;
 import shapes.Square;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static final double PI_IS_A_GREAT_NUMBER = 3.14159265359;
 
-    public static void main(String[] args) {
-        Circle circle1 = new Circle(10);
-        Circle circle2 = new Circle(25);
-        Square square = new Square(15);
-        Rectangle rectangle = new Rectangle(45, 20);
+    public static void main(String[] args) throws IOException {
 
-        double sumOfAreas = addUpAreas(circle2, circle1, square, rectangle);
+        fileWriter();
+//        collections();
+//        TestBase test = new TestBase();
+//        test.setup();
 
-        System.out.println(sumOfAreas);
-
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Enter the divided number");
+//        try {
+//            int a = scanner.nextInt();
+//            System.out.println("Enter the divider");
+//            int b = scanner.nextInt();
+//            divideTwoNumbers(a, b);
+//        } catch (InputMismatchException e) {
+//            System.out.println("Sorry, but you should enter a number");
+//        } catch (ArithmeticException e) {
+//            System.out.println("Sorry, but I can't divide by zero: " + e.getMessage());
+//        }
+//        finally {
+//            System.out.println("I am a finally block");
+//        }
+//
+//        Circle circle1 = new Circle(10);
+//        Circle circle2 = new Circle(25);
+//        Square square = new Square(15);
+//        Rectangle rectangle = new Rectangle(45, 20);
+//
+//        double sumOfAreas = addUpAreas(circle2, circle1, square, rectangle);
+//
+//
+////        double sumOfAreas1 = addUpAreas(circle2, circle1, square);
+//
+//
+//        System.out.println(sumOfAreas);
+//
 
 
 //        String myName = "Vadim";
@@ -209,10 +238,88 @@ public class Main {
 
     public static double addUpAreas(Shape... shapes) {
         double sum = 0;
+
+        Shape randomShape = shapes[3];
+
         for (Shape shape : shapes) {
+            if (shape instanceof Circle) {
+                ((Circle)shape).circleHello();
+            } else if (shape instanceof Square) {
+                ((Square)shape).sayHello();
+            }
             sum += shape.getArea();
             shape.hello();
         }
         return sum;
+    }
+
+    public static void divideTwoNumbers(int a, int b) {
+        System.out.println(a / b);
+    }
+
+    public static void collections() {
+
+
+        ArrayList<String> names = new ArrayList<>();
+
+        names.add("Vadim");
+        names.add("Jack");
+        names.add("Jill");
+
+        names.add(2, "John");
+
+        int jillIndex = names.indexOf("Jill");
+
+        if (jillIndex == -1) {
+            System.out.println("Couldn't find expected value in the list");
+        }
+
+        names.forEach(System.out::println);
+
+    }
+
+    public static void streamApi() {
+        String a = "10";
+        String b = "20";
+        int z = Integer.parseInt(a);
+
+
+        String y = a + b;
+
+        ArrayList<Integer> numbers = new ArrayList<>();
+        numbers.add(10);
+        numbers.add(110);
+        numbers.add(110);
+        numbers.add(5);
+        numbers.add(5);
+        numbers.add(256);
+
+        ArrayList<Integer> numbersGreaterThan100 = numbers.stream().distinct().filter(x -> x > 100)
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        numbersGreaterThan100.forEach(System.out::println);
+    }
+
+    public static void fileWriter() throws IOException {
+        ArrayList<Book> books = new ArrayList<>();
+
+        Book harryPotter = new Book("Harry Potter", "Joanne Rowling",
+                "Fantasy", 300, 2026, 50, 5);
+        Book lotr = new Book("LOTR", "J. R. Tolkien",
+                "Fantasy", 567, 2024, 40, 1);
+        Book gameOfThrones = new Book("Game of Thrones", "George Martin",
+                "Fantasy", 700, 2020, 60, 2);
+
+        books.add(harryPotter);
+        books.add(lotr);
+        books.add(gameOfThrones);
+
+        FileWriter file = new FileWriter("D:\\books.txt", false);
+
+        for (Book book : books) {
+            file.write(book.getDataForFileWriter() + "\n");
+        }
+
+        file.close();
     }
 }
