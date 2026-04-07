@@ -3,21 +3,34 @@ import shapes.Circle;
 import shapes.Shape;
 import shapes.Square;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+    private static final String FILE_PATH = "D:\\books.txt";
     public static final double PI_IS_A_GREAT_NUMBER = 3.14159265359;
+
+
+    private static ArrayList<Book> books;
+
 
     public static void main(String[] args) throws IOException {
 
-        fileWriter();
+//        fileReader();
+//
+//
+//        fileWriter();
+
+
+        readProperties();
+
+
 //        collections();
 //        TestBase test = new TestBase();
 //        test.setup();
@@ -301,7 +314,6 @@ public class Main {
     }
 
     public static void fileWriter() throws IOException {
-        ArrayList<Book> books = new ArrayList<>();
 
         Book harryPotter = new Book("Harry Potter", "Joanne Rowling",
                 "Fantasy", 300, 2026, 50, 5);
@@ -314,7 +326,7 @@ public class Main {
         books.add(lotr);
         books.add(gameOfThrones);
 
-        FileWriter file = new FileWriter("D:\\books.txt", false);
+        FileWriter file = new FileWriter(FILE_PATH, false);
 
         for (Book book : books) {
             file.write(book.getDataForFileWriter() + "\n");
@@ -322,4 +334,36 @@ public class Main {
 
         file.close();
     }
+
+    public static void fileReader() throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File(FILE_PATH));
+
+        while (scanner.hasNext()) {
+            String line = scanner.nextLine();
+            String[] substrings = line.split("/");
+            String bookName = substrings[0];
+            String author = substrings[1];
+            String genre = substrings[2];
+            int numberOfPages = Integer.parseInt(substrings[3]);
+            int year = Integer.parseInt(substrings[4]);
+            double price = Double.parseDouble(substrings[5].replace(",", "."));
+            int qty = Integer.parseInt(substrings[6]);
+
+            Book book = new Book(bookName, author, genre, numberOfPages, year, price, qty);
+            books.add(book);
+        }
+    }
+
+    public static void readProperties() throws IOException {
+        Properties props = new Properties();
+
+
+        FileInputStream fis = new FileInputStream("resources/test.properties");
+        props.load(fis);
+
+        String url = props.getProperty("url");
+        System.out.println(url);
+
+    }
+
 }

@@ -51,5 +51,4 @@ public class Book extends Goods {
     public String toString() {
         return stringInfo;
     }
-
 }
